@@ -1,12 +1,12 @@
 package com.movieflix.controller;
 
-import com.movieflix.entity.Category;
+import com.movieflix.controller.request.CategoryRequest;
+import com.movieflix.controller.response.CategoryResponse;
 import com.movieflix.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/movieflix/category")
@@ -16,19 +16,18 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @GetMapping
-    public List<Category> getAllCategories () {
+    public List<CategoryResponse> getAllCategories () {
         return categoryService.findAll();
     }
 
     @PostMapping
-    public Category saveCategory (@RequestBody Category category) {
-        return categoryService.saveCategory(category);
+    public CategoryResponse saveCategory (@RequestBody CategoryRequest request) {
+        return categoryService.saveCategory(request);
     }
 
     @GetMapping("/{id}")
-    public Category getByCategoryId (@PathVariable Long id) {
-        Optional<Category> category = categoryService.findById(id);
-        return category.orElse(null);
+    public CategoryResponse getByCategoryId (@PathVariable Long id) {
+        return categoryService.findById(id);
     }
 
     @DeleteMapping("/{id}")
