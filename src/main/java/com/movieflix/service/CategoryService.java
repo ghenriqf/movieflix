@@ -25,10 +25,10 @@ public class CategoryService {
                 .toList();
     }
 
-    public CategoryResponse saveCategory (CategoryRequest request) {
+    public CategoryResponse save (CategoryRequest request) {
         Category entity = CategoryMapper.toEntity(request);
-        categoryRepository.save(entity);
-        return CategoryMapper.toResponse(entity);
+        Category entitySaved = categoryRepository.save(entity);
+        return CategoryMapper.toResponse(entitySaved);
     }
 
     public CategoryResponse findById (Long id) throws Exception {
@@ -38,7 +38,7 @@ public class CategoryService {
                 .orElseThrow(Exception::new);
     }
 
-    public void deleteCategory (Long id) {
+    public void deleteById (Long id) {
         categoryRepository.deleteById(id);
     }
 }
