@@ -31,14 +31,11 @@ public class CategoryService {
         return CategoryMapper.toResponse(entity);
     }
 
-    public CategoryResponse findById (Long id) {
-        Optional<Category> entity = categoryRepository.findById(id);
-
-        if (entity.isPresent()) {
-            return CategoryMapper.toResponse(entity.get());
-        }
-
-        return null;
+    public CategoryResponse findById (Long id) throws Exception {
+        return categoryRepository
+                .findById(id)
+                .map(CategoryMapper::toResponse)
+                .orElseThrow(Exception::new);
     }
 
     public void deleteCategory (Long id) {
