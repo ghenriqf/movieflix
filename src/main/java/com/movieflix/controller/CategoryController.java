@@ -19,19 +19,19 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @GetMapping
-    public ResponseEntity<List<CategoryResponse>> getAllCategories () {
+    public ResponseEntity<List<CategoryResponse>> getAll () {
         return ResponseEntity.ok(categoryService.findAll());
     }
 
     @PostMapping
-    public ResponseEntity<CategoryResponse> saveCategory (@RequestBody CategoryRequest request) {
+    public ResponseEntity<CategoryResponse> save (@RequestBody CategoryRequest request) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(categoryService.saveCategory(request));
+                .body(categoryService.save(request));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CategoryResponse> getByCategoryId (@PathVariable Long id) {
+    public ResponseEntity<CategoryResponse> getById (@PathVariable Long id) {
         try {
             return ResponseEntity.ok(categoryService.findById(id));
         } catch (Exception e) {
@@ -40,8 +40,8 @@ public class CategoryController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteByCategoryId (@PathVariable Long id) {
-        categoryService.deleteCategory(id);
+    public ResponseEntity<Void> deleteById (@PathVariable Long id) {
+        categoryService.deleteById(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
