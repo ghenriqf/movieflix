@@ -9,7 +9,7 @@ import java.util.List;
 public record MovieRequest(
         String title,
         String description,
-        LocalDate releaseData,
+        LocalDate releaseDate,
         double rating,
         List<Long> categories,
         List<Long> streamings
