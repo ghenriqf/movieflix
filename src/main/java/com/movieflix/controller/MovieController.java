@@ -50,4 +50,9 @@ public class MovieController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<MovieResponse>> findByCategory (@RequestParam Long category) {
+        return ResponseEntity.ok(movieService.findByCategory(category));
+    }
 }
