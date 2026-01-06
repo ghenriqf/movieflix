@@ -84,6 +84,13 @@ public class MovieService {
         return MovieMapper.toResponse(movieRepository.save(movie));
     }
 
+    public List<MovieResponse> findByCategory(Long categoryId) {
+        return movieRepository.findByCategories_Id(categoryId)
+                .stream()
+                .map(MovieMapper::toResponse)
+                .toList();
+    }
+
     private List<Category> findCategories (List<Category> categories) {
 
         List<Category> categoriesFound = new ArrayList<>();
