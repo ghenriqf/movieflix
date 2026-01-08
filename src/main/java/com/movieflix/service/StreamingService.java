@@ -3,6 +3,7 @@ package com.movieflix.service;
 import com.movieflix.controller.request.StreamingRequest;
 import com.movieflix.controller.response.StreamingResponse;
 import com.movieflix.entity.Streaming;
+import com.movieflix.exception.ResourceNotFoundException;
 import com.movieflix.mapper.StreamingMapper;
 import com.movieflix.repository.StreamingRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,11 +31,11 @@ public class StreamingService {
         return StreamingMapper.toResponse(entitySaved);
     }
 
-    public StreamingResponse findById (Long id) throws Exception {
+    public StreamingResponse findById (Long id) {
         return streamingRepository
                 .findById(id)
                 .map(StreamingMapper::toResponse)
-                .orElseThrow(Exception::new);
+                .orElseThrow(() -> new ResourceNotFoundException("Streaming com não encontrado com id: " + id));
     }
 
     public void deleteById (Long id) {

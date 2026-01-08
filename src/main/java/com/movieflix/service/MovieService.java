@@ -6,6 +6,7 @@ import com.movieflix.controller.response.MovieResponse;
 import com.movieflix.entity.Category;
 import com.movieflix.entity.Movie;
 import com.movieflix.entity.Streaming;
+import com.movieflix.exception.ResourceNotFoundException;
 import com.movieflix.mapper.MovieMapper;
 import com.movieflix.repository.CategoryRepository;
 import com.movieflix.repository.MovieRepository;
@@ -42,9 +43,10 @@ public class MovieService {
         return MovieMapper.toResponse(entitySaved);
     }
 
-    public MovieResponse findById (Long id) throws Exception {
+    public MovieResponse findById (Long id) {
         Movie movie = movieRepository.findById(id)
-                .orElseThrow(Exception::new);
+                .orElseThrow(() -> new ResourceNotFoundException("Filme não encontrado com id: " + id)
+                );
 
         return MovieMapper.toResponse(movie);
     }
@@ -53,10 +55,10 @@ public class MovieService {
         movieRepository.deleteById(id);
     }
 
-    public MovieResponse update(Long id, MovieRequest request) throws Exception {
+    public MovieResponse update(Long id, MovieRequest request) {
 
         Movie movie = movieRepository.findById(id)
-                .orElseThrow(Exception::new);
+                .orElseThrow(() -> new ResourceNotFoundException("Filme não encontrado com id: " + id));
 
         List<Category> categories = findCategories(
                 request.categories().stream()

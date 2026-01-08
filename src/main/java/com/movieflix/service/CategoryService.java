@@ -3,6 +3,7 @@ package com.movieflix.service;
 import com.movieflix.controller.request.CategoryRequest;
 import com.movieflix.controller.response.CategoryResponse;
 import com.movieflix.entity.Category;
+import com.movieflix.exception.ResourceNotFoundException;
 import com.movieflix.mapper.CategoryMapper;
 import com.movieflix.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,11 +32,11 @@ public class CategoryService {
         return CategoryMapper.toResponse(entitySaved);
     }
 
-    public CategoryResponse findById (Long id) throws Exception {
+    public CategoryResponse findById (Long id) {
         return categoryRepository
                 .findById(id)
                 .map(CategoryMapper::toResponse)
-                .orElseThrow(Exception::new);
+                .orElseThrow(() -> new ResourceNotFoundException("Categoria não encontrada com id: " + id));
     }
 
     public void deleteById (Long id) {
