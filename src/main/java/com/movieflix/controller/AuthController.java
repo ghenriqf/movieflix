@@ -5,7 +5,7 @@ import com.movieflix.controller.request.UserRequest;
 import com.movieflix.controller.response.LoginResponse;
 import com.movieflix.controller.response.UserResponse;
 import com.movieflix.entity.User;
-import com.movieflix.service.TokenService;
+import com.movieflix.security.TokenService;
 import com.movieflix.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
