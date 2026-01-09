@@ -301,30 +301,3 @@ Request:
 * Erros de validação retornam `400 Bad Request` com lista de mensagens
 * Recurso não encontrado retorna `404 Not Found`
 * Credenciais inválidas retornam `400 Bad Request`
-
----
-
-## Build
-
-```bash
-mvn clean package
-```
-
----
-
-## Testes
-
-```bash
-mvn test
-```
-
----
-
-## Execução em Produção
-
-```bash
-java -jar target/movieflix-0.0.1-SNAPSHOT.jar
-```
-
-```
-```
