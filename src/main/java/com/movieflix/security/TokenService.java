@@ -14,7 +14,7 @@ import java.util.Optional;
 @Service
 public class TokenService {
 
-    @Value("{movieflix.security.secret}")
+    @Value("${movieflix.security.secret}")
     private String secret;
 
     public String generateToken (User user) {
